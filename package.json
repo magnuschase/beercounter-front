@@ -9,9 +9,14 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/dotenv": "^1.4.1",
     "core-js": "^3.9.1",
-    "nuxt": "^2.15.3"
+    "dotenv": "^10.0.0",
+    "nuxt": "^2.15.3",
+    "sass-loader": "^12.1.0",
+    "vue-tailwind": "^2.3.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.0.1",

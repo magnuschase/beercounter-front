@@ -39,6 +39,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -46,5 +48,27 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  server: {
+    port: 8080
+  },
+
+  auth: {
+    cookie: false,
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'http://localhost:3000/login', method: 'post', propertyName: "token" },
+          user: { url: 'http://localhost:3000/login/user', method: 'post', propertyName: false }
+        }
+      }
+    }
+  },
+  redirect: {
+    login: '/login',
+    logout: '/login',
+    callback: '/',
+    home: '/'
+  },
 }
