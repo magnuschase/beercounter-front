@@ -136,7 +136,7 @@ export default {
       if (this.passphrase == process.env.PASSPHRASE) {
         try {
           await axios
-            .post("http://localhost:3000/add/user", userData)
+            .post("https://piwo.tech/add/user", userData)
             .then((res) => {
               alert("Zostałeś zarejestrowany. Teraz możesz się zalogować");
               this.$router.push("/");

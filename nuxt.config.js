@@ -40,7 +40,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -59,8 +59,8 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'http://localhost:3000/login', method: 'post', propertyName: "token" },
-          user: { url: 'http://localhost:3000/login/user', method: 'post', propertyName: false }
+          login: { url: 'https://piwo.tech/login', method: 'post', propertyName: "token" },
+          user: { url: 'https://piwo.tech/login/user', method: 'post', propertyName: false }
         }
       }
     }
