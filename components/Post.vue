@@ -5,7 +5,20 @@
       class="absolute top-8 left-4 w-28 h-28 rounded-full opacity-90"
       :src="post.imgLink"
     />
-    <div class="h-16 py-2 px-2">
+    <div class="h-16 py-2 px-2 relative">
+      <span
+        class="
+          absolute
+          top-2
+          left-2
+          font-bold
+          text-xs text-yellow-400
+          mr-4
+          opacity-60
+          select-none
+        "
+        >{{ post.score }}/5</span
+      >
       <div class="h-18 w-full font-bold text-right text-yellow-400 uppercase">
         <NuxtLink :to="{ path: 'profile', query: { username: post.who } }">{{
           post.who
@@ -41,7 +54,7 @@
       <div class="w-full flex flex-col">
         <div class="flex flex-col h-full px-4">
           <div class="text-xs h-12">Opis: {{ post.desc }}</div>
-          <div class="mt-2 flex justify-end">
+          <div class="mt-2 flex justify-end items-center">
             <NuxtLink :to="{ path: 'post', query: { id: post._id } }">
               <div class="relative cursor-pointer">
                 <button

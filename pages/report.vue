@@ -266,10 +266,13 @@ export default {
     };
   },
   async fetch() {
+    let data = {
+      score: false,
+      filtered: false,
+    };
     this.beers = await axios
-      .post("https://piwo.tech/get/beers")
+      .post("https://piwo.tech/get/beertable", data)
       .then((res) => res.data);
-    await this.beers.sort((a, b) => (a.drank < b.drank ? 1 : -1));
     await this.beers.forEach((beer) => {
       beer.label = `${beer.beername} | ${beer.volume}ml`;
     });
@@ -294,7 +297,12 @@ export default {
       if (this.file != undefined) {
         let fd = new FormData();
         fd.append("image", this.file);
-
+        if (this.desc.length > 80) {
+          console.log(this.desc);
+          this.desc = this.desc.slice(0, 77);
+          this.desc += "...";
+          console.log(this.desc, this.desc.length);
+        }
         if (this.oldBeer && this.score != 0) {
           if (this.selected != null) {
             this.blockButton = true;
