@@ -168,7 +168,7 @@
       >
       <NuxtLink
         @click="isOpen = false"
-        to="/profile"
+        to="/my/profile"
         class="
           flex
           items-center
@@ -297,7 +297,7 @@
       >
       <div class="fixed bottom-0 w-full">
         <span
-          @click="isOpen = false"
+          @click="logout()"
           class="
             flex
             items-center
@@ -356,6 +356,18 @@ export default {
           this.timeUntil = `zostało ${days}d ${hours}h ${minutes}min ${seconds}s do mazur`;
         else this.timeUntil = "mazury edition";
       }, 1000);
+    },
+    logout: async function () {
+      this.isOpen = false;
+      try {
+        await this.$auth.logout().then(() => {
+          alert("Zostałeś wylogowany!");
+          this.$router.push("/login");
+        });
+      } catch (err) {
+        console.log(err);
+        alert("error " + err);
+      }
     },
   },
   watch: {

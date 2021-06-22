@@ -227,6 +227,7 @@ export default {
           this.rankTable = await axios
             .post("https://piwo.tech/get/beertable", this.beerParams)
             .then((res) => res.data);
+          console.log(this.rankTable);
           break;
       }
       this.sortBy = name;

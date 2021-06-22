@@ -24,6 +24,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: "~/plugins/star-rating.js", mode: "client" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +42,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
+    'nuxt-vue-select'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -60,7 +62,8 @@ export default {
       local: {
         endpoints: {
           login: { url: 'https://piwo.tech/login', method: 'post', propertyName: "token" },
-          user: { url: 'https://piwo.tech/login/user', method: 'post', propertyName: false }
+          user: { url: 'https://piwo.tech/login/user', method: 'post', propertyName: false },
+          logout: { url: 'https://piwo.tech/logout', method: 'post', propertyName: false }
         }
       }
     }
