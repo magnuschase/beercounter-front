@@ -129,11 +129,12 @@ export default {
   },
   methods: {
     click: async function () {
+      console.log(process.env.VUE_APP_PASSPHRASE);
       let userData = {
         name: this.username,
         password: this.password,
       };
-      if (this.passphrase == process.env.PASSPHRASE) {
+      if (this.passphrase == process.env.VUE_APP_PASSPHRASE) {
         try {
           await axios
             .post("https://piwo.tech/add/user", userData)
