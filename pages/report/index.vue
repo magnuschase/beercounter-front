@@ -249,6 +249,7 @@
 
 <script>
 import axios from "axios";
+import * as imageConversion from "image-conversion";
 
 export default {
   middleware: "auth",
@@ -291,6 +292,9 @@ export default {
       if (image != undefined) {
         this.file = image;
         this.uploadText = "Zdjęcie zostało dodane";
+        console.log(this.file);
+        const res = await imageConversion.compress(this.file, 0.8);
+        this.file = res;
       }
     },
     switchBeer: function () {
@@ -305,10 +309,8 @@ export default {
         fd.append("file", this.file);
 
         if (this.desc.length > 80) {
-          console.log(this.desc);
           this.desc = this.desc.slice(0, 77);
           this.desc += "...";
-          console.log(this.desc, this.desc.length);
         }
         if (this.oldBeer && this.score != 0) {
           if (this.selected != null) {

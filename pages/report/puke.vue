@@ -161,6 +161,7 @@
 
 <script>
 import axios from "axios";
+import * as imageConversion from "image-conversion";
 
 export default {
   middleware: "auth",
@@ -189,6 +190,9 @@ export default {
       if (image != undefined) {
         this.file = image;
         this.uploadText = "Zdjęcie zostało dodane";
+        console.log(this.file);
+        const res = await imageConversion.compress(this.file, 0.8);
+        this.file = res;
       }
     },
     addPost: async function () {
