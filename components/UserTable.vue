@@ -57,7 +57,9 @@
         <div class="text-center">{{ i + 1 }}</div>
         <div class="col-span-2 text-center truncate">{{ user.username }}</div>
         <div class="col-span-2 text-center truncate">{{ user.drank }}</div>
-        <div class="col-span-2 text-center truncate">{{ user.alcohol }}</div>
+        <div class="col-span-2 text-center truncate">
+          {{ Math.floor(user.alcohol) }}
+        </div>
         <div class="col-span-2 text-center truncate">
           {{ Math.floor(user.points) }}
         </div>
