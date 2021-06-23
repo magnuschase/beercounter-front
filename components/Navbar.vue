@@ -138,7 +138,7 @@
         </span>
         <span>Posty (piwa)</span></NuxtLink
       >
-            <NuxtLink
+      <NuxtLink
         to="/others"
         @click="isOpen = false"
         class="
@@ -195,7 +195,10 @@
       >
       <NuxtLink
         @click="isOpen = false"
-        to="/my/profile"
+        :to="{
+          path: 'profile',
+          query: { username: this.$auth.user.data.username },
+        }"
         class="
           flex
           items-center
