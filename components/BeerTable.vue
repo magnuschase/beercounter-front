@@ -28,12 +28,66 @@
           font-bold
         "
       >
-        <div class="text-center">{{ i + 1 }}</div>
-        <div class="col-span-2 text-center truncate">{{ beer.beername }}</div>
-        <div class="col-span-2 text-center truncate">{{ beer.drank }}</div>
-        <div class="col-span-2 text-center truncate">{{ beer.volume }}ml</div>
-        <div class="col-span-2 text-center truncate">{{ beer.voltage }}</div>
-        <div class="col-span-2 text-center truncate">
+        <div class="text-center flex items-center justify-center">
+          {{ i + 1 }}
+        </div>
+        <div
+          class="
+            col-span-2
+            text-xs text-center
+            flex
+            items-center
+            justify-center
+          "
+        >
+          {{ beer.beername }}
+        </div>
+        <div
+          class="
+            col-span-2
+            text-center
+            truncate
+            flex
+            justify-center
+            items-center
+          "
+        >
+          {{ beer.drank }}
+        </div>
+        <div
+          class="
+            col-span-2
+            text-center
+            truncate
+            flex
+            justify-center
+            items-center
+          "
+        >
+          {{ beer.volume }}ml
+        </div>
+        <div
+          class="
+            col-span-2
+            text-center
+            truncate
+            flex
+            justify-center
+            items-center
+          "
+        >
+          {{ beer.voltage }}
+        </div>
+        <div
+          class="
+            col-span-2
+            text-center
+            truncate
+            flex
+            justify-center
+            items-center
+          "
+        >
           {{ Math.floor(beer.score * 100) / 100 }}
         </div>
       </div>

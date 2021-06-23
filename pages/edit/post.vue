@@ -150,12 +150,10 @@ export default {
           beername: this.selected.beername,
           desc: this.desc,
         };
-        await axios
-          .post("http://localhost:3000/change/post", data)
-          .then((res) => {
-            alert(res.data.message);
-            this.$router.push("/posts");
-          });
+        await axios.post("https://piwo.tech/change/post", data).then((res) => {
+          alert(res.data.message);
+          this.$router.push("/posts");
+        });
       } else alert("Wybierz piwo!");
     },
   },

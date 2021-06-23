@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="container mx-auto h-full pt-20">
+      <div v-if="blockButton">
+        <h2 class="text-3xl font-bold text-yellow-400 my-4 text-center">
+          {{ infoText }}
+        </h2>
+      </div>
       <!-- MAIN NAV -->
       <h2 class="text-3xl font-bold text-yellow-400 text-center">
         DODAJ ZDJĘCIE
@@ -263,6 +268,7 @@ export default {
         volume: "",
       },
       blockButton: false,
+      infoText: "trwa przesyłanie pliku",
     };
   },
   async fetch() {
@@ -296,7 +302,8 @@ export default {
     addPost: async function () {
       if (this.file != undefined) {
         let fd = new FormData();
-        fd.append("image", this.file);
+        fd.append("file", this.file);
+
         if (this.desc.length > 80) {
           console.log(this.desc);
           this.desc = this.desc.slice(0, 77);
@@ -306,32 +313,27 @@ export default {
         if (this.oldBeer && this.score != 0) {
           if (this.selected != null) {
             this.blockButton = true;
-            let axiosInstance = axios.create({
-              baseURL: "https://api.imgur.com/3/",
-              headers: {
-                Authorization: `Client-ID ${process.env.VUE_APP_IMGUR_ID}`,
-                Accept: "application/json",
-              },
-              crossDomain: true,
-            });
+            axios
+              .post("https://piwo.tech/upload/file", fd)
+              .then(async (res) => {
+                this.infoText = "plik został przesłany, dodawanie posta";
+                let postData = {
+                  who: this.$auth.user.data.username,
+                  beer: this.selected.beername,
+                  link: res.data.link,
+                  date: new Date().getTime(),
+                  desc: this.desc != "" ? this.desc : "brak opisu",
+                  score: this.score,
+                };
 
-            axiosInstance.post("image", fd).then(async (res) => {
-              let postData = {
-                who: this.$auth.user.data.username,
-                beer: this.selected.beername,
-                link: res.data.data.link,
-                date: new Date().getTime(),
-                desc: this.desc != "" ? this.desc : "brak opisu",
-                score: this.score,
-              };
-
-              await axios
-                .post("https://piwo.tech/add/post", postData)
-                .then((response) => {
-                  alert("Dodano nowy post!");
-                  this.$router.push("/posts");
-                });
-            });
+                await axios
+                  .post("https://piwo.tech/add/post", postData)
+                  .then((response) => {
+                    this.infoText = "dodano post!";
+                    alert("Dodano nowy post!");
+                    this.$router.push("/posts");
+                  });
+              });
           } else alert("Wybierz piwo!");
         } else if (!this.oldBeer && this.score != 0) {
           if (
