@@ -436,6 +436,11 @@ export default {
 
     return { userdata, usertable, beertable };
   },
+  watch: {
+    "$route.query"() {
+      this.$nuxt.refresh();
+    },
+  },
   methods: {
     volumeDrank: function (array) {
       let volume = 0;

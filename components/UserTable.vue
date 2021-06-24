@@ -1,36 +1,54 @@
 <template>
   <div class="container">
     <div class="w-full h-24 mb-4 flex justify-around">
-      <div class="w-16 h-100 text-xs text-center">
+      <NuxtLink
+        :to="{
+          path: '/profile',
+          query: { username: prop[1].username },
+        }"
+        class="w-16 h-100 text-xs text-center"
+      >
         <p>2</p>
-        <p class="truncate">{{ prop[1].username || "" }}</p>
+        <p class="truncate">{{ prop[1].username }}</p>
         <div class="w-16 h-16 bg-green-900 rounded-b-3xl">
           <img
             :src="prop[1].profilePic"
             class="w-full h-full opacity-80 rounded-b-3xl"
           />
         </div>
-      </div>
-      <div class="w-16 h-100 text-xs text-center">
+      </NuxtLink>
+      <NuxtLink
+        :to="{
+          path: '/profile',
+          query: { username: prop[0].username },
+        }"
+        class="w-16 h-100 text-xs text-center"
+      >
         <p>1</p>
-        <p class="truncate">{{ prop[0].username || "" }}</p>
+        <p class="truncate">{{ prop[0].username }}</p>
         <div class="w-16 h-16 bg-green-900 rounded-b-3xl">
           <img
-            :src="prop[0].profilePic || ''"
+            :src="prop[0].profilePic"
             class="w-full h-full opacity-80 rounded-b-3xl"
           />
         </div>
-      </div>
-      <div class="w-16 h-100 text-xs text-center">
+      </NuxtLink>
+      <NuxtLink
+        :to="{
+          path: '/profile',
+          query: { username: prop[2].username },
+        }"
+        class="w-16 h-100 text-xs text-center"
+      >
         <p>3</p>
-        <p class="truncate">{{ prop[2].username || "" }}</p>
+        <p class="truncate">{{ prop[2].username }}</p>
         <div class="w-16 h-16 bg-green-900 rounded-b-3xl">
           <img
-            :src="prop[2].profilePic || ''"
+            :src="prop[2].profilePic"
             class="w-full h-full opacity-80 rounded-b-3xl"
           />
         </div>
-      </div>
+      </NuxtLink>
     </div>
     <!-- POINTS TABLE -->
     <div v-if="sort == 'Points'">
