@@ -2,6 +2,9 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  env: {
+    VUE_APP_PASSPHRASE: process.env.VUE_APP_PASSPHRASE
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'beercounter-front',
