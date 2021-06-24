@@ -98,7 +98,7 @@ export default {
     return {
       rankTable: [],
       currentTab: "",
-      sortBy: "Points",
+      sortBy: "Drank",
       beerParams: {
         filter: true,
         score: false,
