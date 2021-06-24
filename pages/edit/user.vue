@@ -151,7 +151,7 @@ export default {
 
     if (
       this.$auth.user.data.username == this.user.username ||
-      this.$auth.user.admin
+      this.$auth.user.data.admin
     ) {
       console.log("authorized");
     } else this.$router.push("/401");

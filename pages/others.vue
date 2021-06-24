@@ -55,7 +55,7 @@
           v-for="post in filteredPosts"
           :key="post._id"
         >
-          <Puke :post="post" />
+          <Puke :post="post" :mode="currentTab.toLowerCase()" />
         </div>
       </div>
       <!-- SORT MORE -->
@@ -95,15 +95,20 @@ export default {
     };
   },
   async fetch() {
-    this.posts = await axios
-      .post("https://piwo.tech/get/pukes")
-      .then((res) => res.data);
+    if (this.currentTab == "Puke") {
+      this.posts = await axios
+        .post("https://piwo.tech/get/pukes")
+        .then((res) => res.data);
+    } else {
+      this.posts = await axios
+        .post("https://piwo.tech/get/others")
+        .then((res) => res.data);
+    }
+
     await this.posts.sort((a, b) => (a.date.date < b.date.date ? 1 : -1));
     this.filteredPosts = this.posts.filter(
       (element, index) => index < this.filter
     );
-    console.log(this.posts);
-    console.log(this.filteredPosts);
   },
   methods: {
     changeTab: async function (name) {

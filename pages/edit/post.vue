@@ -112,7 +112,7 @@ export default {
 
     if (
       this.$auth.user.data.username == this.post.who ||
-      this.$auth.user.admin
+      this.$auth.user.data.admin
     ) {
       this.desc = this.post.desc;
 

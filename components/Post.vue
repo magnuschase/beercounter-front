@@ -58,7 +58,7 @@
             <NuxtLink
               v-if="
                 this.$auth.user.data.username == post.who ||
-                this.$auth.user.admin
+                this.$auth.user.data.admin
               "
               :to="{ path: '/edit/post', query: { id: post._id } }"
             >

@@ -325,7 +325,7 @@
         </span>
         <span>Zgłoś inne</span></NuxtLink
       >
-      <div class="fixed bottom-0 w-full">
+      <div class="w-full xs:fixed xs:bottom-0">
         <span
           @click="logout()"
           class="

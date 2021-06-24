@@ -129,7 +129,7 @@
         >
       </div>
       <div
-        v-if="this.$auth.user.admin"
+        v-if="this.$auth.user.data.admin"
         class="
           outline
           relative

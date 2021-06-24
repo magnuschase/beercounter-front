@@ -40,8 +40,40 @@
         <div class="flex flex-col h-full px-4">
           <div class="text-xs h-12">Opis: {{ post.desc }}</div>
           <div class="mt-2 flex justify-end items-center">
-            <NuxtLink :to="{ path: 'puke', query: { id: post._id } }">
-              <div class="relative cursor-pointer">
+            <div class="relative cursor-pointer" @click="like(post._id)">
+              <button
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  w-8
+                  h-8
+                  text-green-100
+                  transition-colors
+                  duration-150
+                  bg-green-700
+                  rounded-full
+                  focus:shadow-outline
+                  hover:bg-green-800
+                "
+              >
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                  <path
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <span class="font-bold absolute left-5 top-4 text-yellow-400">{{
+                post.likes.length
+              }}</span>
+            </div>
+            <NuxtLink
+              v-if="mode == 'puke'"
+              :to="{ path: 'puke', query: { id: post._id } }"
+            >
+              <div class="ml-2 relative cursor-pointer">
                 <button
                   class="
                     inline-flex
@@ -49,6 +81,7 @@
                     justify-center
                     w-8
                     h-8
+                    ml-2
                     text-green-100
                     transition-colors
                     duration-150
@@ -58,20 +91,25 @@
                     hover:bg-green-800
                   "
                 >
-                  <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 fill-current"
+                    viewBox="0 0 24 24"
+                  >
                     <path
-                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
-                    ></path>
+                      d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625.055 1.83-1.023 4.456-1.993 6.368 2.602-.47 6.301-1.508 7.978-2.536 9.236 2.247 15.968-3.405 15.968-9.457 0-5.812-5.701-10.007-12-10.007zm-5 11.5c-.829 0-1.5-.671-1.5-1.5s.671-1.5 1.5-1.5 1.5.671 1.5 1.5-.671 1.5-1.5 1.5zm5 0c-.829 0-1.5-.671-1.5-1.5s.671-1.5 1.5-1.5 1.5.671 1.5 1.5-.671 1.5-1.5 1.5zm5 0c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5c.829 0 1.5.671 1.5 1.5s-.671 1.5-1.5 1.5z"
+                    />
                   </svg>
                 </button>
-                <span class="font-bold absolute left-5 top-4 text-yellow-400">{{
-                  post.likes.length
+                <span class="font-bold absolute left-7 top-4 text-yellow-400">{{
+                  post.comments.length
                 }}</span>
               </div>
             </NuxtLink>
-            <NuxtLink :to="{ path: 'puke', query: { id: post._id } }">
+            <NuxtLink
+              v-if="mode == 'other'"
+              :to="{ path: 'other', query: { id: post._id } }"
+            >
               <div class="ml-2 relative cursor-pointer">
                 <button
                   class="
@@ -113,8 +151,21 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["post"],
+  props: ["post", "mode"],
+  methods: {
+    like: async function (id) {
+      const data = {
+        id: id,
+        who: this.$auth.user.data.username,
+        type: this.mode,
+      };
+      await axios.post("https://piwo.tech/like", data).then((res) => {
+        this.$nuxt.refresh();
+      });
+    },
+  },
 };
 </script>
 

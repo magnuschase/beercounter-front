@@ -17,7 +17,11 @@
         <div class="col-span-2 text-center">% ALC</div>
         <div class="col-span-2 text-center">OCENA</div>
       </div>
-      <div
+      <NuxtLink
+        :to="{
+          path: '/beer',
+          query: { beername: beer.beername },
+        }"
         v-for="(beer, i) in prop"
         :key="beer.beername"
         class="
@@ -90,7 +94,7 @@
         >
           {{ Math.floor(beer.score * 100) / 100 }}
         </div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

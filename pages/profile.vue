@@ -246,7 +246,7 @@
       <div
         v-if="
           userdata.data.username == this.$auth.user.data.username ||
-          this.$auth.user.admin
+          this.$auth.user.data.admin
         "
         class="w-full flex justify-center"
       >
@@ -283,6 +283,36 @@
             <span>Edytuj profil</span>
           </button>
         </NuxtLink>
+      </div>
+      <!-- USERTABLE -->
+      <div class="my-4">
+        <div
+          class="
+            grid grid-cols-7
+            bg-green-900
+            border-b border-gray-900
+            font-bold
+          "
+        >
+          <div class="text-center">NR</div>
+          <div class="col-span-4 text-center">PIWO</div>
+          <div class="col-span-2 text-center">WYPITE</div>
+        </div>
+        <div
+          v-for="(beer, i) in beertable"
+          :key="beer.beername"
+          class="
+            grid grid-cols-7
+            bg-green-700
+            border-b border-green-800
+            text-sm
+            font-bold
+          "
+        >
+          <div class="text-center">{{ i + 1 }}</div>
+          <div class="col-span-4 text-center truncate">{{ beer.beername }}</div>
+          <div class="col-span-2 text-center truncate">{{ beer.drank }}</div>
+        </div>
       </div>
       <!-- POSTS NAV -->
       <div class="w-100 mt-4 h-7 border-b flex font-bold">
@@ -339,7 +369,7 @@
             v-for="puke in userdata.pukes"
             :key="puke._id"
           >
-            <Puke :post="puke" />
+            <Puke :post="puke" :mode="'puke'" />
           </div>
         </div>
         <div v-if="currentTab == 'Other'">
@@ -348,7 +378,7 @@
             v-for="other in userdata.other"
             :key="other._id"
           >
-            <Puke :post="other" />
+            <Puke :post="other" :mode="'other'" />
           </div>
         </div>
       </div>
@@ -390,7 +420,21 @@ export default {
     const usertable = await axios
       .post("https://piwo.tech/get/usertable/posts", { filter: false })
       .then((res) => res.data);
-    return { userdata, usertable };
+
+    const beertable = [];
+    await userdata.posts.forEach((post) => {
+      const index = beertable.findIndex(
+        (element) => element.beername == post.beer
+      );
+      if (index < 0) {
+        beertable.push({ beername: post.beer, drank: 1 });
+      } else {
+        beertable[index].drank += 1;
+      }
+    });
+    beertable.sort((a, b) => (a.drank < b.drank ? 1 : -1));
+
+    return { userdata, usertable, beertable };
   },
   methods: {
     volumeDrank: function (array) {

@@ -131,7 +131,7 @@
         <NuxtLink
           v-if="
             this.$auth.user.data.username == postdata.who ||
-            this.$auth.user.admin
+            this.$auth.user.data.admin
           "
           :to="{ path: '/edit/post', query: { id: postdata._id } }"
         >
@@ -181,7 +181,7 @@
           "
           v-if="
             this.$auth.user.data.username == postdata.who ||
-            this.$auth.user.admin
+            this.$auth.user.data.admin
           "
           @click="remove"
         >
