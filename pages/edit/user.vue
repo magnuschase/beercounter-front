@@ -148,9 +148,8 @@ export default {
         who: this.$route.query.username,
       })
       .then((res) => res.data);
-
     if (
-      this.$auth.user.data.username == this.user.username ||
+      this.$auth.user.data.username == this.user.data.username ||
       this.$auth.user.data.admin
     ) {
       console.log("authorized");
