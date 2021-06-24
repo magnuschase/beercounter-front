@@ -12,7 +12,6 @@
               type="file"
               @change="imageChange($event.target.files[0])"
               accept="image/*"
-              capture="camera"
               class="
                 opacity-0
                 w-full
