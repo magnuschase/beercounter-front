@@ -332,11 +332,11 @@ export default {
                   .post("https://piwo.tech/add/post", postData)
                   .then((response) => {
                     this.infoText = "dodano post!";
-                    alert("Dodano nowy post!");
+                    this.$swal.fire("Dodano nowy post!");
                     this.$router.push("/posts");
                   });
               });
-          } else alert("Wybierz piwo!");
+          } else this.$swal.fire("Wybierz piwo!");
         } else if (!this.oldBeer && this.score != 0) {
           if (
             this.myBeer.beername != "" &&
@@ -351,7 +351,7 @@ export default {
               (element) => element.beername == this.myBeer.beername
             );
             if (duplicate != undefined) {
-              alert("Jest już piwo o tej nazwie!");
+              this.$swal.fire("Jest już piwo o tej nazwie!");
             } else {
               this.myBeer.volume = parseInt(this.myBeer.volume);
               this.myBeer.voltage = this.myBeer.voltage.replace(",", ".");
@@ -386,14 +386,17 @@ export default {
                 await axios
                   .post("https://piwo.tech/add/post", postData)
                   .then((response) => {
-                    alert("Dodano nowy post!");
+                    this.$swal.fire("Dodano nowy post!");
                     this.$router.push("/posts");
                   });
               });
             }
-          } else alert("Złe dane piwa! Czy na pewno wypełniłaś[eś] wszystko?");
-        } else alert("Oceń piwo!");
-      } else alert("Dodaj zdjęcie!");
+          } else
+            this.$swal.fire(
+              "Złe dane piwa! Czy na pewno wypełniłaś[eś] wszystko?"
+            );
+        } else this.$swal.fire("Oceń piwo!");
+      } else this.$swal.fire("Dodaj zdjęcie!");
     },
   },
 };

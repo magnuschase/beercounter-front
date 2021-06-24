@@ -76,8 +76,6 @@ export default {
     this.filteredPosts = this.posts.filter(
       (element, index) => index < this.filter
     );
-    console.log(this.posts);
-    console.log(this.filteredPosts);
   },
   methods: {
     sortMore: function () {

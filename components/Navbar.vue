@@ -196,7 +196,7 @@
       <NuxtLink
         @click="isOpen = false"
         :to="{
-          path: 'profile',
+          path: '/profile',
           query: { username: this.$auth.user.data.username },
         }"
         class="
@@ -391,12 +391,14 @@ export default {
       this.isOpen = false;
       try {
         await this.$auth.logout().then(() => {
-          alert("Zostałeś wylogowany!");
+          this.$swal.fire("Zostałeś wylogowany!");
           this.$router.push("/login");
         });
       } catch (err) {
         console.log(err);
-        alert("error " + err);
+        this.$swal.fire(
+          `Wystąpił błąd! Zrób skrina i poinformuj admina ${err}`
+        );
       }
     },
   },
@@ -409,6 +411,9 @@ export default {
           else document.body.style.removeProperty("overflow");
         }
       },
+    },
+    $route() {
+      this.isOpen = false;
     },
   },
   mounted() {

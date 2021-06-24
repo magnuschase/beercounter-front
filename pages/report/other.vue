@@ -275,12 +275,12 @@ export default {
                 .post("https://piwo.tech/add/other", pukeData)
                 .then((response) => {
                   this.infoText = "dodano post!";
-                  alert("Dodano nowy post!");
+                  this.$swal.fire("Dodano nowy post!");
                   this.$router.push("/others");
                 });
             });
-        } else alert("Wybierz użytkownika!");
-      } else alert("Dodaj zdjęcie!");
+        } else this.$swal.fire("Wybierz użytkownika!");
+      } else this.$swal.fire("Dodaj zdjęcie!");
     },
   },
 };

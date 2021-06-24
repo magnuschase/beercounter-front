@@ -28,7 +28,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-900
@@ -43,7 +43,7 @@
               Math.floor(userdata.data.points)
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             ILOŚĆ PUNKTOW
           </div>
         </div>
@@ -52,7 +52,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-900
@@ -67,7 +67,7 @@
               userdata.posts.length
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             WYPITE PIWA
           </div>
         </div>
@@ -76,7 +76,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-900
@@ -92,7 +92,7 @@
               }}<span class="text-xs">ml</span></span
             >
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             WYPITY ALKOHOL
           </div>
         </div>
@@ -101,7 +101,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-800
@@ -117,7 +117,7 @@
               }}<span class="text-xs">l</span></span
             >
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             WYPITE PIWO
           </div>
         </div>
@@ -126,7 +126,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-800
@@ -141,7 +141,7 @@
               userdata.pukes.length
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             ILOŚĆ ZWROTÓW
           </div>
         </div>
@@ -150,7 +150,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-800
@@ -165,7 +165,7 @@
               userdata.other.length
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             ILOŚĆ INNYCH
           </div>
         </div>
@@ -174,7 +174,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-700
@@ -189,7 +189,7 @@
               likes(userdata)
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             ILOŚĆ LAJKÓW
           </div>
         </div>
@@ -198,7 +198,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-700
@@ -213,7 +213,7 @@
               comments(userdata)
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             ILOŚĆ KOMENTARZY
           </div>
         </div>
@@ -222,7 +222,7 @@
             class="
               absolute
               top-6
-              left-4
+              left-5
               h-20
               w-20
               bg-green-700
@@ -237,7 +237,7 @@
               rankNum(usertable)
             }}</span>
           </div>
-          <div class="absolute top-0 left-2 font-bold mw-60 text-sm">
+          <div class="absolute top-0 left-3 font-bold mw-60 text-sm">
             RANKING NR
           </div>
         </div>
@@ -287,7 +287,7 @@
       <!-- POSTS NAV -->
       <div class="w-100 mt-4 h-7 border-b flex font-bold">
         <div class="flex w-2/12 h-full justify-start">
-          <div class="h-28px justify-self-start ml-2">TOP</div>
+          <div class="h-28px justify-self-start ml-2">POSTS</div>
         </div>
         <div class="flex w-10/12 h-full justify-end">
           <div
@@ -298,7 +298,7 @@
             }"
             @click="changeTab('Post')"
           >
-            POSTS
+            BEER
           </div>
           <div
             class="h-28px justify-self-end mr-2 cursor-pointer"
@@ -384,6 +384,9 @@ export default {
         who: query.username,
       })
       .then((res) => res.data);
+    userdata.posts.sort((a, b) => (a.date.date < b.date.date ? 1 : -1));
+    userdata.pukes.sort((a, b) => (a.date.date < b.date.date ? 1 : -1));
+    userdata.other.sort((a, b) => (a.date.date < b.date.date ? 1 : -1));
     const usertable = await axios
       .post("https://piwo.tech/get/usertable/posts", { filter: false })
       .then((res) => res.data);

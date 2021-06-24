@@ -135,12 +135,6 @@ export default {
   },
 
   methods: {
-    imageChange: async function (image) {
-      if (image != undefined) {
-        this.file = image;
-        this.uploadText = "Zdjęcie zostało dodane";
-      }
-    },
     save: async function () {
       if (this.selected != null) {
         let temporary = this.desc.replace(/\s/g, "");
@@ -151,10 +145,10 @@ export default {
           desc: this.desc,
         };
         await axios.post("https://piwo.tech/change/post", data).then((res) => {
-          alert(res.data.message);
+          this.$swal.fire(res.data.message);
           this.$router.push("/posts");
         });
-      } else alert("Wybierz piwo!");
+      } else this.$swal.fire("Wybierz piwo!");
     },
   },
 };

@@ -134,21 +134,27 @@ export default {
         name: this.username,
         password: this.password,
       };
-      if (this.passphrase == process.env.VUE_APP_PASSPHRASE) {
-        try {
-          await axios
-            .post("https://piwo.tech/add/user", userData)
-            .then((res) => {
-              alert("Zostałeś zarejestrowany. Teraz możesz się zalogować");
-              this.$router.push("/");
-            });
-        } catch (err) {
-          console.log(err);
-          alert("Nazwa użytkownika jest już zajęta");
-        }
-      } else {
-        alert("Zły kod dostępu!");
-      }
+      if (userData.name.length < 20) {
+        if (userData.name != "" && userData.password != "") {
+          if (this.passphrase == process.env.VUE_APP_PASSPHRASE) {
+            try {
+              await axios
+                .post("https://piwo.tech/add/user", userData)
+                .then((res) => {
+                  this.$swal.fire(
+                    "Zostałeś zarejestrowany. Teraz możesz się zalogować"
+                  );
+                  this.$router.push("/");
+                });
+            } catch (err) {
+              console.log(err);
+              this.$swal.fire("Nazwa użytkownika jest już zajęta");
+            }
+          } else {
+            this.$swal.fire("Zły kod dostępu!");
+          }
+        } else this.$swal.fire("Nieprawidłowe dane!");
+      } else this.$swal.fire("Za długi login! Maksymalna ilość znaków: 20");
     },
   },
 };

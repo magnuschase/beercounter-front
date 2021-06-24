@@ -100,7 +100,7 @@ export default {
         await this.$auth.loginWith("local", { data: userData }).then(() => {});
       } catch (err) {
         console.log(err);
-        alert("Nieprawidłowe dane logowania! Spróbuj ponownie.");
+        this.$swal.fire("Nieprawidłowe dane logowania! Spróbuj ponownie.");
       }
     },
   },
