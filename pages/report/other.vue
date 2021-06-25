@@ -278,6 +278,11 @@ export default {
                   this.$swal.fire("Dodano nowy post!");
                   this.$router.push("/others");
                 });
+            })
+            .catch((err) => {
+              this.$swal.fire(
+                `Wystąpił błąd! Wyślij skrina adminowi i spróbuj ponownie. ${err}`
+              );
             });
         } else this.$swal.fire("Wybierz użytkownika!");
       } else this.$swal.fire("Dodaj zdjęcie!");

@@ -335,6 +335,11 @@ export default {
                     this.$swal.fire("Dodano nowy post!");
                     this.$router.push("/posts");
                   });
+              })
+              .catch((err) => {
+                this.$swal.fire(
+                  `Wystąpił błąd! Wyślij skrina adminowi i spróbuj ponownie. ${err}`
+                );
               });
           } else this.$swal.fire("Wybierz piwo!");
         } else if (!this.oldBeer && this.score != 0) {
@@ -358,38 +363,38 @@ export default {
               this.myBeer.voltage =
                 Math.floor(parseFloat(this.myBeer.voltage) * 100) / 100;
               this.blockButton = true;
+
               await axios
                 .post("https://piwo.tech/add/beer", this.myBeer)
                 .then((res) => {
                   console.log(res);
                 });
+              axios
+                .post("https://piwo.tech/upload/file", fd)
+                .then(async (res) => {
+                  this.infoText = "plik został przesłany, dodawanie posta";
+                  let postData = {
+                    who: this.$auth.user.data.username,
+                    beer: this.myBeer.beername,
+                    link: res.data.link,
+                    date: new Date().getTime(),
+                    desc: this.desc != "" ? this.desc : "brak opisu",
+                    score: this.score,
+                  };
 
-              let axiosInstance = axios.create({
-                baseURL: "https://api.imgur.com/3/",
-                headers: {
-                  Authorization: `Client-ID ${process.env.VUE_APP_IMGUR_ID}`,
-                  Accept: "application/json",
-                },
-                crossDomain: true,
-              });
-
-              axiosInstance.post("image", fd).then(async (res) => {
-                let postData = {
-                  who: this.$auth.user.data.username,
-                  beer: this.myBeer.beername,
-                  link: res.data.data.link,
-                  date: new Date().getTime(),
-                  desc: this.desc != "" ? this.desc : "brak opisu",
-                  score: this.score,
-                };
-
-                await axios
-                  .post("https://piwo.tech/add/post", postData)
-                  .then((response) => {
-                    this.$swal.fire("Dodano nowy post!");
-                    this.$router.push("/posts");
-                  });
-              });
+                  await axios
+                    .post("https://piwo.tech/add/post", postData)
+                    .then((response) => {
+                      this.infoText = "dodano post!";
+                      this.$swal.fire("Dodano nowy post!");
+                      this.$router.push("/posts");
+                    });
+                })
+                .catch((err) => {
+                  this.$swal.fire(
+                    `Wystąpił błąd! Wyślij skrina adminowi i spróbuj ponownie. ${err}`
+                  );
+                });
             }
           } else
             this.$swal.fire(
