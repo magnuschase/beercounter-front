@@ -19,7 +19,7 @@
         }}</span>
       </div>
       <div class="flex w-6/12 h-full justify-end">
-        <span class="text-yellow-400 flex items-center">{{
+        <span class="text-yellow-400 text-sm flex items-center">{{
           comment.date.formatted
         }}</span>
       </div>
