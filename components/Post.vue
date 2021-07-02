@@ -1,10 +1,17 @@
 <template>
   <div class="h-72 w-72 rounded-b-3xl bg-green-900 my-4 mx-4 relative">
-    <div class="absolute top-8 left-4 w-28 h-28 rounded-full bg-green-900" />
-    <img
-      class="absolute top-8 left-4 w-28 h-28 rounded-full opacity-90"
-      :src="post.imgLink"
-    />
+    <div class="absolute top-8 left-4 w-28 h-28 rounded-full bg-green-900">
+      <div
+        class="
+          w-28
+          h-28
+          rounded-full
+          opacity-90
+          bg-no-repeat bg-cover bg-center
+        "
+        :style="{ backgroundImage: `url(${post.imgLink})` }"
+      ></div>
+    </div>
     <div class="h-16 py-2 px-2 relative">
       <span
         class="

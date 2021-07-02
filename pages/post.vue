@@ -4,10 +4,20 @@
       <!-- PROFILE PIC -->
       <div class="w-full h-52 my-4 flex items-center justify-center">
         <div class="h-full w-52 rounded-full bg-green-900">
-          <img
+          <!-- <img
             :src="postdata.imgLink"
             class="h-full w-52 rounded-full opacity-80"
-          />
+          /> -->
+          <div
+            class="
+              h-full
+              w-52
+              rounded-full
+              opacity-80
+              bg-no-repeat bg-cover bg-center
+            "
+            :style="{ backgroundImage: `url(${postdata.imgLink})` }"
+          ></div>
         </div>
       </div>
       <!-- MAIN NAV -->
