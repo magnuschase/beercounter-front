@@ -34,6 +34,20 @@
             "
           >
             {{ uploadText }}
+            <div
+              v-if="file != undefined"
+              class="
+                ml-4
+                w-10
+                h-10
+                rounded-full
+                opacity-70
+                bg-cover bg-no-repeat bg-center
+                flex
+                justify-center
+              "
+              :style="{ backgroundImage: `url(${previewImg})` }"
+            ></div>
           </label>
         </div>
       </div>
@@ -177,6 +191,7 @@ export default {
       blockButton: false,
       encodedFile: null,
       infoText: "trwa przesyłanie pliku",
+      previewImg: null,
     };
   },
   async fetch() {
@@ -193,6 +208,12 @@ export default {
         console.log(this.file);
         const res = await imageConversion.compress(this.file, 0.8);
         this.file = res;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.previewImg = e.target.result;
+        };
+        reader.readAsDataURL(image);
       }
     },
     addPost: async function () {
