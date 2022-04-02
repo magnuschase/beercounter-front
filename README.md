@@ -1,4 +1,6 @@
-# beercounter-front
+## App that helps you count your beer consumption
+
+Social media web app that counts your beer consumption, with integrated ranking system and a feed
 
 ## Build Setup
 
@@ -16,5 +18,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
